@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link , useNavigate} from "react-router-dom";
 
 import XSvg from "../../../assets/X.jsx" ; 
 
@@ -17,6 +17,7 @@ const LoginPage = () => {
 		password: "",
 	});
 	const queryClient = useQueryClient() ; 
+	const navigate = useNavigate(); 
 
 
 	const {mutate, isError , isPending , error} = useMutation({
@@ -32,6 +33,7 @@ const LoginPage = () => {
 				if(res.data.user) {
 					toast.success(res.data.message) ; 
 					queryClient.invalidateQueries({queryKey : ['authUser']});
+					navigate("/home") ;
 					
 				}else {
 					toast.error(res.data.error) ;
