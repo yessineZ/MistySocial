@@ -1,6 +1,6 @@
 import bcrypt from "bcryptjs"
 import User from "../models/user.model.js";
-import generateTokenAndSetCookie from "../../../chatAppMern/backend/utils/generateToken.js";
+import generateTokenAndSetCookie from "../lib/utils/generateToken.js";
 
 export const signUp = async (req,res) => {
     try {
