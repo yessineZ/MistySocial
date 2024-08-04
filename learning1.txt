@@ -1,0 +1,3 @@
+TanStack library for coonecting the backend to the frontend its like redux tollkit and zustand library
+
+npm i @tanstack/react-query-devtools

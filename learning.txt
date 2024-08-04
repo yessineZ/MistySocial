@@ -1,0 +1,15 @@
+commands : 
+npm vite@latest
+
+npm install express jsonwebtoken mongoose axios dotenv cookie-parser cloudinary
+npm i -D nodemon 
+"type" : "module" //import x from 'x'
+"type": "commonjs" // const x = require("x") ; 
+
+
+
+json viewer pro //google extension for goood look of json data 
+
+TanStack library for coonecting the backend to the frontend its like redux tollkit and zustand library
+
+npm i @tanstack/react-query-devtools
