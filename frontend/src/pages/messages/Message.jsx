@@ -7,7 +7,7 @@ const Message = ({ message }) => {
 	const {senderId , receiverId} = message ; 
 	const fromMe = senderId === authUser._id; 
 	const formattedTime = formatPostDate(message.createdAt);
-	const myPic = authUser?.profieImg ?  authUser.profileImg : '../../../dist/avatar-placeholder.png' ; 
+	const myPic = authUser?.profileImg ?  authUser.profileImg : '../../../dist/avatar-placeholder.png' ; 
 	const hisPic = selectedConversation?.profileImg ? selectedConversation.profileImg : '../../../dist/avatar-placeholder.png' ; 
 	
 	const profilePic = fromMe ? myPic : hisPic;
