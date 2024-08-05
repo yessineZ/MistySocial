@@ -11,23 +11,27 @@ import axios from 'axios';
 import { toast } from 'react-hot-toast';
 import LoadingSpinner from './components/common/LoadingSpinner';
 import AllMessagesPage from './pages/messages/AllMessagesPage';
+
 const fetchAuthUser = async () => {
   try {
-    const res = await axios.get('/api/auth/getMe');
-    if (res.error) {
-      return null;
+    const res = await axios.get('/api/auth/getMe',{
+      withCredentials: true
+    });
+    if (res.data.error) {
+      throw new Error(res.data.error);
     }
     return res.data?.user || null;
   } catch (err) {
-    return null;
+    throw new Error(err.response?.data?.message || err.message);
   }
 };
 
 function App() {
-  const { data: authUser, isLoading, error, isError } = useQuery({
+  const { data: authUser, isLoading, isError, error } = useQuery({
     queryKey: ['authUser'],
     queryFn: fetchAuthUser,
     retry: false,
+    onError: (err) => toast.error(err.message),
   });
 
   if (isLoading) {
@@ -42,12 +46,13 @@ function App() {
     <div className='flex max-w-6xl mx-auto'>
       {authUser && <Sidebar />}
       <Routes>
+        <Route path='/' element={<Navigate to={authUser ? '/home' : '/login'} />} />
         <Route path='/home' element={authUser ? <HomePage /> : <Navigate to='/login' />} />
-        <Route path='/login' element={!authUser ? <LoginPage /> : <Navigate to='/' />} />
-        <Route path='/signup' element={!authUser ? <SignUpPage /> : <Navigate to='/' />} />
+        <Route path='/login' element={!authUser ? <LoginPage /> : <Navigate to='/home' />} />
+        <Route path='/signup' element={!authUser ? <SignUpPage /> : <Navigate to='/home' />} />
         <Route path='/notifications' element={authUser ? <NotificationPage /> : <Navigate to='/login' />} />
         <Route path='/profile/:username' element={authUser ? <ProfilePage /> : <Navigate to='/login' />} />
-         <Route path='/messages' element={authUser ? <AllMessagesPage /> : <Navigate to='/login' />} />
+        <Route path='/messages' element={authUser ? <AllMessagesPage /> : <Navigate to='/login' />} />
       </Routes>
       {authUser && <RightPanel />}
     </div>

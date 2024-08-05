@@ -16,7 +16,9 @@ const Messages = () => {
         const getMessages = async () => {
             setLoading(true) ;
             try {
-                const res = await axios.get(`/api/messages/${selectedConversation._id}`) ;
+                const res = await axios.get(`/api/messages/${selectedConversation._id}`,{
+                  withCredentials: true
+                }) ;
                 console.log(res.data)
                 setMessages(res.data.conversation) ;
                 console.log(messages) ; 

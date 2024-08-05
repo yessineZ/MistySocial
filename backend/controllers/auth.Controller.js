@@ -94,15 +94,22 @@ export const signIn = async (req,res) => {
 
  }
 
- export const getMe = (req,res) => {
-    console.log('getMeController') ;
-    const user = req.user ;
-    if(!user) {
-        res.status(200).json({error : 'Not authenticated'}) ;
-        return ;
+export const getMe = async (req, res) => {
+  try {
+    // Retrieve the user from the database using the ID from the request object
+    const user = await User.findById(req.user._id).select('-password');
+    // If the user is found, send a response with the user data
+    if (user) {
+      return res.json({ message: "User found", user : user });
+    } else {
+      return res.status(404).json({ message: "User not found" });
     }
-    res.json({user}) ;
- }
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).json({ error: "Server error" });
+  }
+};
+
 
 export const logOut = (req,res) => {
     try {

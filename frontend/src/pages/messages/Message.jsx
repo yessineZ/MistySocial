@@ -6,10 +6,11 @@ const Message = ({ message }) => {
 	const {senderId , receiverId} = message ; 
 	const fromMe = senderId === authUser._id; 
 	const formattedTime = formatPostDate(message.createdAt);
-	const profilePic = fromMe ? authUser.profileImg : selectedConversation?.profileImg;
+	const myPic = authUser?.profieImg ?  authUser.profieImg : "/avatar-placeholder.png" 
+	const profilePic = fromMe ? myPic : selectedConversation?.profileImg;
 	const bubbleBgColor = fromMe ? "bg-blue-500" : "";
 	const shakeClass = message.shouldShake ? "shake" : "";
-
+	 
 	return (
 		<div className={`chat ${fromMe ? "chat-end" : "chat-start"} `}>
 			<div className='chat-image avatar'>

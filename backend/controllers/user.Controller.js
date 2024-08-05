@@ -223,14 +223,3 @@ export const getUsersForSideBar = async (req,res) => {
     
 
 }
-
-export const deleteUser = async (req,res) => {
-    try {
-        const user = await User.deleteMany({}) ;
-        res.status(200).json({message : "All users deleted"}) ; 
-        }catch(err) {
-            console.log(err.message) ;
-            return res.status(500).json({error : err.message}) ;
-        }
-
-}

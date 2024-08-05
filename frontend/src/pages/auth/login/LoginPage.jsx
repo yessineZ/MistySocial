@@ -33,7 +33,6 @@ const LoginPage = () => {
 				if(res.data.user) {
 					toast.success(res.data.message) ; 
 					queryClient.invalidateQueries({queryKey : ['authUser']});
-					navigate("/home") ;
 					
 				}else {
 					toast.error(res.data.error) ;
@@ -53,7 +52,6 @@ const LoginPage = () => {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		console.log(formData) ; 
 		mutate(formData);
 	};
 

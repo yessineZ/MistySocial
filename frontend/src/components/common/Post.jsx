@@ -17,7 +17,7 @@ const Post = ({ post }) => {
   const { data: authUser } = useQuery({ queryKey: ['authUser'] });
 
   // Determine if the current user owns the post
-  const isMyPost = authUser?._id === post.user._id;
+  const isMyPost = authUser?._id === post?.user._id;
 
   // Check if the post is liked by the authenticated user
   const isLiked = post.likes?.includes(authUser?._id);
