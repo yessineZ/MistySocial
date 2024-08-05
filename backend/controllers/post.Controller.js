@@ -175,7 +175,7 @@ export const getPostByUsername = async (req, res) => {
     }
     
     console.log(`User ID: ${user._id}`);
-    const posts = await Post.find({ user: user._id }).populate("user",["username","profileImg"]).lean();
+    const posts = await Post.find({ user: user._id }).sort({createdAt : -1}).populate("user",["username","profileImg"]).lean();
 
     return res.status(200).json(posts);
   } catch (err) {
