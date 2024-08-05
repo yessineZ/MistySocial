@@ -17,12 +17,10 @@ const fetchAuthUser = async () => {
     const res = await axios.get('/api/auth/getMe',{
       withCredentials: true
     });
-    if (res.data.error) {
-      throw new Error(res.data.error);
-    }
+    console.log(res) ; 
     return res.data?.user || null;
   } catch (err) {
-    throw new Error(err.response?.data?.message || err.message);
+    throw new Error(err.message);
   }
 };
 
@@ -30,8 +28,8 @@ function App() {
   const { data: authUser, isLoading, isError, error } = useQuery({
     queryKey: ['authUser'],
     queryFn: fetchAuthUser,
-    retry: false,
     onError: (err) => toast.error(err.message),
+    retry: false,
   });
 
   if (isLoading) {

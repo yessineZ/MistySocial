@@ -1,13 +1,16 @@
 import { formatPostDate } from '../../utils/TransformDate'  ; 
 import {useQuery} from '@tanstack/react-query' ; 
 import selectedConversation from '../Conversations/Conversation' ;
+
 const Message = ({ message }) => {
 	const {data :  authUser , isPending : loading , isError , error  } = useQuery({queryKey : ['authUser']}) ; 
 	const {senderId , receiverId} = message ; 
 	const fromMe = senderId === authUser._id; 
 	const formattedTime = formatPostDate(message.createdAt);
-	const myPic = authUser?.profieImg ?  authUser.profieImg : "/avatar-placeholder.png" 
-	const profilePic = fromMe ? myPic : selectedConversation?.profileImg;
+	const myPic = authUser?.profieImg ?  authUser.profieImg : '../../../dist/avatar-placeholder.png' ; 
+	const hisPic = selectedConversation?.profileImg ? selectedConversation.profileImg : '../../../dist/avatar-placeholder.png' ; 
+	
+	const profilePic = fromMe ? myPic : hisPic;
 	const bubbleBgColor = fromMe ? "bg-blue-500" : "";
 	const shakeClass = message.shouldShake ? "shake" : "";
 	 

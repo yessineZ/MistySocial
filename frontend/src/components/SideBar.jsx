@@ -7,10 +7,12 @@ import { BiLogOut } from "react-icons/bi";
 import { useMutation, useQueryClient, useQuery } from '@tanstack/react-query';
 import axios from "axios";
 import { toast } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
+import { TiMessages } from "react-icons/ti";
 
 const Sidebar = () => {
   const queryClient = useQueryClient() ; 
-
+  const navigate = useNavigate() ; 
   const { data: authUser } = useQuery({ queryKey: ['authUser'] });
 
   const { mutate: logOut, isLoading: isPending } = useMutation({
@@ -20,6 +22,7 @@ const Sidebar = () => {
         if (res.data?.message) {
           toast.success(res.data.message);
           queryClient.invalidateQueries({queryKey : ['authUser']}) ;
+          navigate("/login") ; 
           
         } else {
           toast.error(res.error);
@@ -72,7 +75,7 @@ const Sidebar = () => {
               to={`/messages`}
               className='flex gap-3 items-center hover:bg-stone-900 transition-all rounded-full duration-300 py-2 pl-2 pr-4 max-w-fit cursor-pointer'
             >
-              <FaUser className='w-6 h-6' />
+              <TiMessages className='w-6 h-6' />
               <span className='text-lg hidden md:block'>Messages</span>
             </Link>
           </li>

@@ -1,58 +1,59 @@
 import express from 'express';
 import authRoute from './routes/authRoute.routes.js';
-import env from 'dotenv' ; 
+import userRoute from './routes/userRoute.routes.js';
+import postRoute from './routes/postRoute.routes.js';
+import notificationsRoute from './routes/notifications.routes.js';
+import messagesRoute from './routes/messages.routes.js';
+
+import env from 'dotenv';
 import { connectToMongo } from './connectToDb/connectToMongo.js';
 import cookieParser from 'cookie-parser';
-import userRoute from './routes/userRoute.routes.js'
-import cors from 'cors' ; 
-
-import {v2 as cloudinary } from 'cloudinary';
-import postRoute from './routes/postRoute.routes.js' ;
+import cors from 'cors';
+import { v2 as cloudinary } from 'cloudinary';
 import path from 'path';
-import notificationsRoute from './routes/notifications.routes.js';
-import messagesRoute from './routes/messages.routes.js' ;
 import { app, server, io } from './socket/socket.js';
-const __dirname = path.resolve() ; 
+
+const __dirname = path.resolve();
 env.config({
-    path : './.env' 
+  path: './.env',
 });
 
+// Cloudinary configuration
 cloudinary.config({
-    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-    api_key: process.env.CLOUDINARY_API_KEY,
-    api_secret: process.env.CLOUDINARY_API_SECRET
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
 
+app.use(express.json({ limit: '10mb' }));
 
-app.use(express.json({limit : "10mb"})) ; //image upload 
-app.get('/',(req,res) => {
-    res.json({
-        message: 'Welcome to the Express.js API!'
-    })
+// CORS configuration
+app.use(cors({
+  credentials: true,
+  origin: 'http://localhost:3000', 
+}));
+
+
+app.use(cookieParser());
+
+
+server.listen(process.env.PORT, () => {
+  connectToMongo();
+  console.log(`Server is running at PORT ${process.env.PORT}`); // Server started successfully
 });
 
-server.listen(process.env.PORT,() => {
-    connectToMongo() ; 
-    console.log(`server is running at PORT ${process.env.PORT}`)  // server started successfully
-});
-app.use(cookieParser()) ; 
-
-app.use('/api/auth',authRoute) ;
-app.use('/api/user',userRoute) ;
-app.use('/api/post',postRoute) ; 
-app.use('/api/notifications',notificationsRoute) ;
-app.use('/api/messages',messagesRoute) ;
-
-
-
+// Routes
+app.use('/api/auth', authRoute);
+app.use('/api/user', userRoute);
+app.use('/api/post', postRoute);
+app.use('/api/notifications', notificationsRoute);
+app.use('/api/messages', messagesRoute);
 
 
 app.use(express.static(path.join(__dirname, 'frontend/dist')));
-app.get('*',(req,res) => {
-    res.sendFile(path.join(__dirname, 'frontend','dist','index.html'));
-
-})
 
 
-
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'frontend', 'dist', 'index.html'));
+});

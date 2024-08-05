@@ -63,7 +63,7 @@ const ProfilePage = () => {
 
   const queryClient = useQueryClient();
 
-  const { mutate: update, isLoading: isUpdating } = useMutation({
+  const { mutate: update, isPending :isUpdating } = useMutation({
     mutationFn: async () => {
       const res = await axios.post('/api/user/update', { profileImg, coverImg });
       return res.data;

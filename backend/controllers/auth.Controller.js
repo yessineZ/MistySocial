@@ -102,11 +102,11 @@ export const getMe = async (req, res) => {
     if (user) {
       return res.json({ message: "User found", user : user });
     } else {
-      return res.status(404).json({ message: "User not found" });
+      return res.json({ message: "User not found" });
     }
   } catch (err) {
     console.error(err.message);
-    res.status(500).json({ error: "Server error" });
+    res.json({ error: "Server error" });
   }
 };
 

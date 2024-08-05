@@ -6,6 +6,8 @@ import { FaUser } from "react-icons/fa";
 import { FaHeart } from "react-icons/fa6";
 import { IoMdHeartDislike } from "react-icons/io";
 import { FaComment } from "react-icons/fa";
+import { SlUserUnfollow } from "react-icons/sl";
+
 import { toast } from "react-hot-toast";
 import axios from 'axios'; 
 import { useQuery, useQueryClient, useMutation } from '@tanstack/react-query'; 
@@ -83,6 +85,7 @@ const NotificationPage = () => {
           <div className='border-b border-gray-700' key={notification._id}>
             <div className='flex gap-2 p-4'>
               {notification.type === "follow" && <FaUser className='w-7 h-7 text-primary' />}
+              {notification.type === "unfollow" && <SlUserUnfollow className='w-7 h-7 text-red-700' />}
               {notification.type === "like" && <FaHeart className='w-7 h-7 text-red-500' />}
               {notification.type === "unlike" && <IoMdHeartDislike className='w-7 h-7 text-red-700' />}
               {notification.type === "comment" && <FaComment className='w-7 h-7 text-slate-600' />}
@@ -93,8 +96,8 @@ const NotificationPage = () => {
                   </div>
                 </div>
                 <div className='flex gap-1'>
-                  <span className='font-bold'>@{notification.from.username}</span>{" "}
-                  {notification.type === "follow" ? "followed you" : notification.type === "unlike" ? "disliked your post xd" : notification.type === "comment" ? "commented to your post" : "liked your post"}
+                  <span className='font-bold text-red-500'>@{notification.from.username}</span>{" "}
+                  {notification.type === "follow" ? "followed you" : notification.type === "unlike" ? "disliked your post xd" : notification.type === "comment" ? "commented to your post" : notification.type === "unfollow" ? "ahahah na7alek el follow" : "liked your post"}
                 </div>
               </Link>
               <div className=" relative top-0 right-0">
