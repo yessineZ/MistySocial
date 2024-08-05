@@ -11,6 +11,7 @@ import {HandleGender} from './GenderCheckBox.jsx' ;
 import {useMutation} from '@tanstack/react-query'
 import axios from 'axios' ;
 import { toast } from "react-hot-toast";
+import {useQueryClient} from '@tanstack/react-query' ; 
 const SignUpPage = () => {
 	const [formData, setFormData] = useState({
 		email: "",
@@ -19,6 +20,7 @@ const SignUpPage = () => {
 		password: "",
         gender : "" ,
 	});
+	const queryClient = useQueryClient() ; 
 
 	let {mutate , isError , isPending , error} = useMutation({
 		mutationFn : async({email , username , fullName , password,gender}) => {
@@ -37,6 +39,7 @@ const SignUpPage = () => {
 				console.log(res) ; 
                 if(res.status === 201) {
 					toast.success(res.data.message) ;
+					queryClient.invalidateQueries({queryKey : ['authUser']});
 				 
 				}else {
 					toast.error(res.data.error) ;
