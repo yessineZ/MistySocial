@@ -7,8 +7,8 @@ const Message = ({ message }) => {
 	const {senderId , receiverId} = message ; 
 	const fromMe = senderId === authUser._id; 
 	const formattedTime = formatPostDate(message.createdAt);
-	const myPic = authUser?.profileImg ?  authUser.profileImg : '../../../dist/avatar-placeholder.png' ; 
-	const hisPic = selectedConversation?.profileImg ? selectedConversation.profileImg : '../../../dist/avatar-placeholder.png' ; 
+	const myPic = authUser?.profileImg ?  authUser.profileImg : '/avatars/boy1.png' ; 
+	const hisPic = selectedConversation?.profileImg ? selectedConversation.profileImg : '/avatars/boy2.png' ; 
 	
 	const profilePic = fromMe ? myPic : hisPic;
 	const bubbleBgColor = fromMe ? "bg-blue-500" : "";
