@@ -101,6 +101,7 @@ const Post = ({ post }) => {
     e.preventDefault();
     const text =comment ; 
     CommentOne(text) ; 
+    setComment("") ; 
      
 
   };
