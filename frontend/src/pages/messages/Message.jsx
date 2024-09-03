@@ -8,10 +8,7 @@ const Message = ({ message }) => {
 	const fromMe = senderId === authUser._id; 
 	const formattedTime = formatPostDate(message.createdAt);
 	const myPic = authUser?.profieImg ?  authUser.profieImg : '/avatar-placeholder.png' ; 
-	const hisPic = selectedConversation?.profileImg ? selectedConversation.profileImg : '../../../dist/avatar-placeholder.png' ; 
-	console.log(selectedConversation) ; 
-	const myPic = authUser?.profileImg ?  authUser.profileImg : '/avatars/boy1.png' ; 
-	const hisPic = selectedConversation?.profileImg ? selectedConversation.profileImg : '/avatars/boy2.png' ; 
+	const hisPic = selectedConversation?.profileImg ? selectedConversation.profileImg : '/avatar-placeholder.png' ; 
 
 	const profilePic = fromMe ? myPic : hisPic;
 	const bubbleBgColor = fromMe ? "bg-blue-500" : "";
