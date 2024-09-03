@@ -1,9 +1,9 @@
 import Post from "./Post";
 import PostSkeleton from "../skeletons/PostSkeleton";
-import { POSTS } from "../../utils/db/dummy";
 import {useQuery } from '@tanstack/react-query' ; 
 import axios from "axios";
 import { useEffect } from "react";
+import toast from "react-hot-toast";
 const Posts = ({type,username,userId}) => {
 
 
@@ -16,7 +16,7 @@ const Posts = ({type,username,userId}) => {
 			case 'posts' : 
 			return `/api/post/all/${username}` ;  
 			case 'likes' : 
-			return `/api/post/likedPosts/${userId}` ;  ;  // userId is the logged in user's id.  ;  // userId is the logged in user's id.  ;  // userId is the logged in user's id.   ;  // userId is the logged in user's id.   ;  // userId is the logged in user's id.   ;  // userId is the logged in user's id.   ;  // userId is the logged
+			return `/api/post/likedPosts/${userId}` ; 
 			default :  
 			return '/api/post/all' ;
 		}
