@@ -9,7 +9,7 @@ const Message = ({ message }) => {
 	const formattedTime = formatPostDate(message.createdAt);
 	const myPic = authUser?.profieImg ?  authUser.profieImg : '../../../dist/avatar-placeholder.png' ; 
 	const hisPic = selectedConversation?.profileImg ? selectedConversation.profileImg : '../../../dist/avatar-placeholder.png' ; 
-	
+	console.log(selectedConversation) ; 
 	const profilePic = fromMe ? myPic : hisPic;
 	const bubbleBgColor = fromMe ? "bg-blue-500" : "";
 	const shakeClass = message.shouldShake ? "shake" : "";

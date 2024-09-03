@@ -100,7 +100,8 @@ const Post = ({ post }) => {
   const handlePostComment = (e) => {
     e.preventDefault();
     const text =comment ; 
-    CommentOne(text) ; 
+    CommentOne(text) ;
+    setComment("") ; 
      
 
   };
@@ -179,7 +180,7 @@ const Post = ({ post }) => {
                       </div>
                       <div className='flex flex-col'>
                         <div className='flex items-center gap-1'>
-                          <span className='font-bold'>{comment.user.fullName}</span>
+                          <span className='font-bold'>{comment.user.username}</span>
                           <span className='text-gray-700 text-sm'>@{comment.user.username}</span>
                         </div>
                         <div className='text-sm'>{comment.text}</div>

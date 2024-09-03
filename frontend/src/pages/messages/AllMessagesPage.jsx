@@ -5,7 +5,7 @@ import MessageContainer from './MessageContainer'
 
 const AllMessagesPage = () => {
   return (
-    <div className='flex flex-row w-full min-w-8 '>
+    <div className='flex flex-row w-full min-w-8 sticky'>
       
       <Conversations/>
       <MessageContainer/>
