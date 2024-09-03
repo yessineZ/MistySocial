@@ -100,11 +100,11 @@ const Post = ({ post }) => {
   const handlePostComment = (e) => {
     e.preventDefault();
     const text =comment ; 
-<<<<<<< HEAD
+
     CommentOne(text) ;
-=======
+
     CommentOne(text) ; 
->>>>>>> 1bebb8de41145abeb16453169658e13016d75324
+
     setComment("") ; 
      
 
